@@ -19,17 +19,31 @@ def usersize():
             valid = False
             size = input("Password Size: ")
 
-def userpunc(string):
-    valid = None
+def userpunc(str):
+    valid = False
     yes = ['yes','y','ye']
     no = ['no','n']
     while valid != True:
-        punc = input(string)
+        punc = input(str)
         if punc.lower() in yes:
-            valid = True
-            return True
+            check = input("Do the special characters have to be specific? (Y/N): ")
+            if check in yes:
+                characterList = []
+                count = 0
+                while True:
+                    count += 1
+                    character = input(count.__str__() + ". ")
+                    characterList.append(character)
+                    check = input('Are there more special characters?: ')
+                    if check in yes:
+                        pass
+                    else:
+                        break
+                characterStr = ''.join(characterList)
+                return characterStr
+            else:
+                return string.punctuation
         elif punc.lower() in no:
-            valid = True
-            return False
+            return ''
         else:
             valid = False

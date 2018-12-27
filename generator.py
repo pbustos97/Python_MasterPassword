@@ -4,27 +4,29 @@ from get_state import state
 from seed import seed
 from userinput import userinput, usersize, userpunc
 
+stringStr = string.ascii_letters + string.digits
+yes = ['yes','ye','y']
+no = ['no','n']
+
 def generate(size, seed, state, punc):
 #state called to make sure generated password doesn't change if reentered
     seed
     state
-    if punc == True:
-        password = ''.join(random.choice(string.ascii_letters + string.digits + string.punctuation) for x in range(size))
-    else:
-        password = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(size))
+    password = ''.join(random.choice(stringStr + punc) for x in range(size))
     print (password)
 
 def finished():
-    finished = userpunc("Are you finished? ")
-    if finished == True:
+    finished = input("Are you finished? ")
+    if finished in yes:
         exit()
         return True
-    if finished == False:
+    if finished in no:
         usize = usersize()
         uinput = userinput(usize)
-        upunc = userpunc("Use puncuations? (Y/N): ")
 
-        generate(usize, seed(uinput), state(), upunc)
+        generate(usize, seed(uinput), state(), userpunc("Use puncuations? (Y/N):"))
+        return False
+    else:
         return False
 
 cont = False
