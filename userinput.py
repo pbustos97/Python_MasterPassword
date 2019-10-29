@@ -1,10 +1,11 @@
 import string
+import hashlib
 
 def userinput(size):
     print('!!! Username and password are case-sensitive !!!')
     print('Service has to be exact, not shortened or lengthened. It can be different cases')
     username = input("Username: ")
-    password = input("Master Password: ")
+    password = str(hashlib.md5(input("Master Password: ").encode()).hexdigest())
     service = input("Service: ")
     return str(username + password + service.lower() + size.__str__())
 
